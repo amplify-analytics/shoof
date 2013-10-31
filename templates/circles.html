@@ -1,0 +1,52 @@
+<!DOCTYPE HTML5>
+<html>
+    <head>
+        <!-- <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script> -->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
+        <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+        <script type="text/javascript" src="http://nvd3.org/nv.d3.js"></script>
+        <link rel="stylesheet" href="http://nvd3.org/src/nv.d3.css">
+
+        <style type="text/css">
+
+            text {
+            font-size: 11px;
+            pointer-events: none;
+            }
+
+            text.parent {
+            fill: #1f77b4;
+            }
+
+            circle {
+            fill: #ccc;
+            stroke: #999;
+            pointer-events: all;
+            }
+
+            circle.parent {
+            fill: #1f77b4;
+            fill-opacity: .1;
+            stroke: steelblue;
+            }
+
+            circle.parent:hover {
+            stroke: #ff7f0e;
+            stroke-width: .5px;
+            }
+
+            circle.child {
+            pointer-events: none;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <h1>Packed Circles<span id="total"></span></h1>
+        <!-- <div id="container"><div id="viz" class="pie"></div></div> -->
+        </div>
+        <script type="text/javascript" src="{{url_for('static', filename='circles-application.js') }}"></script>
+    </body>
+</html>
+

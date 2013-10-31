@@ -1,0 +1,4 @@
+syntax: glob
+*.py[cod]
+.git
+.gitignore
