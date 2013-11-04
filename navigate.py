@@ -32,27 +32,40 @@ def list_dir(path, level=0):
 
         # get all directories (as paths)
         if dirs:
-            found = [{'path': root + '/' + f,
-                      'name': f,
-                      'type': 'dir',
-                      'rsize': rsize(get_size(root + '/' + f)),
-                      'size': get_size(root + '/' + f),
-                      }
-                     for f in dirs
-                     #if os.path.isdir(f)
-                     ]
+            found = []
+
+            for f in dirs:
+                try:
+                    found.append(
+                        {'path': root + '/' + f,
+                         'name': f,
+                         'type': 'dir',
+                         'rsize': rsize(get_size(root + '/' + f)),
+                         'size': get_size(root + '/' + f),
+                         }
+                    )
+                except Exception as e:
+                    print(e)
+
             directory_listing.extend(found)
 
         # get all files (as paths)
         if files:
-            found = [{'path': root + '/' + d,
-                      'name': d,
-                      'type': 'file',
-                      'rsize': rsize(os.path.getsize(root + '/' + d)),
-                      'size': os.path.getsize(root + '/' + d),
-                      }
-                     for d in files
-                     ]
+            found = []
+
+            for d in files:
+                try:
+                    found.append(
+                        {'path': root + '/' + d,
+                         'name': d,
+                         'type': 'file',
+                         'rsize': rsize(os.path.getsize(root + '/' + d)),
+                         'size': os.path.getsize(root + '/' + d),
+                         }
+                    )
+                except Exception as e:
+                    print(e)
+
             directory_listing.extend(found)
 
     sorted_directory_listing = []

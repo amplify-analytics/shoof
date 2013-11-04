@@ -1,4 +1,4 @@
-$.getJSON('/data', function(data){
+$.getJSON('/data', {'path': $('#path').val() } ,function(data){
     if (data && data.results ){
         total = data.results[1]
         dir_list = data.results[0];
@@ -11,7 +11,7 @@ $.getJSON('/data', function(data){
                 {'label': f.name + ' (' + psize.toFixed(1) + '%)' , 'value': psize }
             );
         }
-        $('#total').html(total + ' bytes');
+        $('#total').html(bytesToSize(total));
         draw_pie_result = pie_data;
         draw_nvd3_pie_result = [{'key': 'System Dir', 'values': pie_data}];
         draw_nvd3pie(draw_nvd3_pie_result);
@@ -95,3 +95,14 @@ function draw_pie(data){
                 .attr("text-anchor", "middle")                          //center the text on it's origin
                 .text(function(d, i) { return data[i].label; });        //get the label from our original data array
 }
+
+
+
+
+ function bytesToSize(bytes) {
+    var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes == 0) return '0 Bytes';
+
+    var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
+    return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+};
