@@ -36,9 +36,9 @@ def data():
 def circles_data():
     path = flask.request.args.get('path', None)
     if not path:
-        path = navigate.get_home()
+        path = navigate.get_home() + '/Projects/sos/apps'
     return flask.jsonify(
-        results=navigate.path_to_tree(navigate.get_home() + '/Projects/sos/apps')
+        results=navigate.path_to_tree(path, level=3)
         )
 
 

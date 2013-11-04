@@ -1,4 +1,4 @@
-$.getJSON('/circles-data', function(data){
+$.getJSON('/circles-data', {'path': $('#path').val() } , function(data){
     if (data){
         //
         draw_circles({'name': 'root', 'children': data.results});
