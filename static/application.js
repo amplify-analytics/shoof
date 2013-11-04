@@ -2,18 +2,14 @@ $.getJSON('/data', {'path': $('#path').val() } ,function(data){
     if (data && data.results ){
         total = data.results[1]
         dir_list = data.results[0];
-        pie_data = []
         for (i=0; i < dir_list.length ; i++){
-            f = dir_list[i]
             //console.log(dir_list[i]);
-            psize =  (f.size/total)*100;  // Math.round((f.size/total)*100);
-            pie_data.push(
-                {'label': f.name + ' (' + psize.toFixed(1) + '%)' , 'value': psize }
-            );
+            dir_list[i].label = dir_list[i].name + ' (' + ((parseInt(dir_list[i].size)/total)*100).toFixed(1)  + '%)' ;
+            //{'label': f.name + ' (' + psize.toFixed(1) + '%)' , 'value': psize }
         }
         $('#total').html(bytesToSize(total));
-        draw_pie_result = pie_data;
-        draw_nvd3_pie_result = [{'key': 'System Dir', 'values': pie_data}];
+        // draw_pie_result = pie_data;
+        draw_nvd3_pie_result = [{'key': 'System Dir', 'values': dir_list}];
         draw_nvd3pie(draw_nvd3_pie_result);
         //draw_pie(res);
     }
@@ -26,13 +22,18 @@ function draw_nvd3pie(data){
     nv.addGraph(function() {
     var chart = nv.models.pieChart()
         .x(function(d) { return d.label })
-        .y(function(d) { return d.value })
+        .y(function(d) { return d.size })
         .showLabels(true);
 
         d3.select("#viz svg")
             .datum(data)
         .transition().duration(1200)
             .call(chart);
+
+        d3.selectAll('.nv-slice')
+            .on('click', function(d){
+                window.location.replace('http://localhost:5000?path=' + d.data.path);
+        });
 
     return chart;
     });
