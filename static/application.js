@@ -32,7 +32,9 @@ function draw_nvd3pie(data){
 
         d3.selectAll('.nv-slice')
             .on('click', function(d){
-                window.location.replace('http://localhost:5000?path=' + d.data.path);
+                if (d.data.type == 'dir'){
+                    window.location.replace('http://localhost:5000?path=' + d.data.path);
+                }
         });
 
     return chart;
